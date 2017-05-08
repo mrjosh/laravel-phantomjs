@@ -11,6 +11,7 @@
       "Josh\\Component\\PhantomJs\\": "src/"
     }
   },
+  "license": "MIT",
   "require": {
     "jonnyw/php-phantomjs": "4.*"
   }
