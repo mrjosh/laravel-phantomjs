@@ -17,7 +17,7 @@ class PhantomJsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([ __DIR__ . '/../config.php' => config_path( 'phantomjs.php' ) ]);
+        $this->publishes([ __DIR__ . '/../../config.php' => config_path( 'phantomjs.php' ) ]);
     }
 
     /**
