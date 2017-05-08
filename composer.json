@@ -1,0 +1,17 @@
+{
+  "name": "josh/laravel-phantomjs",
+  "authors": [
+    {
+      "name": "Alireza Josheghani",
+      "email": "josheghani.dev@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Josh\\Component\\PhantomJs\\": "src/"
+    }
+  },
+  "require": {
+    "jonnyw/php-phantomjs": "4.*"
+  }
+}
