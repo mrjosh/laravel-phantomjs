@@ -13,7 +13,7 @@ Via Composer
 $ composer require josh/laravel-phantomjs
 ```
 
-##Config
+## Config
 
 Add the following provider to providers part of config/app.php
 ``` php
@@ -22,7 +22,7 @@ Josh\Component\PhantomJs\Provider\PhantomJsServiceProvider::class
 
 and the following Facade to the aliases part
 ``` php
-'PJCleint' => Josh\Component\PhantomJs\Facade\PhantomJs::class
+'PJClient' => Josh\Component\PhantomJs\Facade\PhantomJs::class
 ```
 
 ## License
