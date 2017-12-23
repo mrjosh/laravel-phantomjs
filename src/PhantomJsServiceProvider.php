@@ -1,10 +1,11 @@
 <?php
 
-namespace Josh\Component\PhantomJs\Provider;
+namespace Josh\Component\PhantomJs;
 
+use JonnyW\PhantomJs\Engine;
 use JonnyW\PhantomJs\Client;
+use Illuminate\Support\ServiceProvider;
 use JonnyW\PhantomJs\DependencyInjection\ServiceContainer;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class PhantomJsServiceProvider extends ServiceProvider
 {
@@ -17,7 +18,7 @@ class PhantomJsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([ __DIR__ . '/../../config.php' => config_path( 'phantomjs.php' ) ]);
+        $this->publishes([ __DIR__ . '/../config.php' => config_path( 'phantomjs.php' ) ]);
     }
 
     /**
@@ -29,7 +30,7 @@ class PhantomJsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('pjclient', function(){
+        $this->app->singleton('phantomjs', function(){
 
             $serviceContainer = $this->getServiceContainer();
 
@@ -47,17 +48,29 @@ class PhantomJsServiceProvider extends ServiceProvider
      *
      * @author Alireza Josheghani <josheghani.dev@gmail.com>
      * @since 8 May 2017
-     * @return \JonnyW\PhantomJs\Engine
+     * @return Engine
      */
     protected function getEngine()
     {
-        $engine = app('\JonnyW\PhantomJs\Engine');
+        $engine = $this->app->make(Engine::class);
 
         if(file_exists(config_path('phantomjs.php'))){
             $config = config('phantomjs');
 
             if(! empty($config['binary_path']) && ! is_null($config['binary_path'])){
                 $engine->setPath($config['binary_path']);
+            }
+
+            if(! empty($config['options']) && ! is_null($config['options'])){
+                $engine->setOptions($config['options']);
+            }
+
+            if(! empty($config['debug']) && ! is_null($config['debug'])){
+                $engine->debug($config['debug']);
+            }
+
+            if(! empty($config['cache']) && ! is_null($config['cache'])){
+                $engine->debug($config['cache']);
             }
         }
 
