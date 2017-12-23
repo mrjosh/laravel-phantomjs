@@ -13,6 +13,7 @@
   },
   "license": "MIT",
   "require": {
-    "jonnyw/php-phantomjs": "4.*"
+    "laravel/framework": "^5",
+    "jonnyw/php-phantomjs": "^4"
   }
 }
