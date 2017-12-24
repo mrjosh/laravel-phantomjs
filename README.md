@@ -27,7 +27,7 @@ and the following Facade to the aliases part
 
 and then you can run vendor:publish command for generating phantomjs config file
  ```bash
- $ php artisan vendor:publish
+ $ php artisan vendor:publish --provider="Josh\Component\PhantomJs\PhantomJsServiceProvider"
  ```
 
 ## Basic Usage
@@ -36,9 +36,12 @@ The following illustrates how to make a basic GET request and output the page co
 ```php
 use Josh\Component\PhantomJs\PhantomJs;
 
+// you can use Facade or app make function to use phantomjs
+// ex: app('phantomjs') or \PhantomJs
+
 $request = PhantomJs::getMessageFactory()->createRequest('http://google.com', 'GET');
 
-$response = $client->getMessageFactory()->createResponse();
+$response = PhantomJs::getMessageFactory()->createResponse();
 
 PhantomJs::send($request, $response);
 
@@ -84,7 +87,7 @@ $request->setMargin('1cm');
 
 $response = PhantomJs::getMessageFactory()->createResponse();
 
-$client->send($request, $response);
+PhantomJs::send($request, $response);
 ```
 
 ## License
