@@ -25,6 +25,11 @@ and the following Facade to the aliases part
 'PhantomJs' => Josh\Component\PhantomJs\PhantomJs::class
 ```
 
+and then you can run vendor:publish command for generating phantomjs config file
+ ```bash
+ $ php artisan vendor:publish
+ ```
+
 ## Basic Usage
 The following illustrates how to make a basic GET request and output the page content:
 
