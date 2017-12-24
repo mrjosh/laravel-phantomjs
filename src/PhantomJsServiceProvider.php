@@ -5,10 +5,29 @@ namespace Josh\Component\PhantomJs;
 use JonnyW\PhantomJs\Engine;
 use JonnyW\PhantomJs\Client;
 use Illuminate\Support\ServiceProvider;
-use JonnyW\PhantomJs\DependencyInjection\ServiceContainer;
 
 class PhantomJsServiceProvider extends ServiceProvider
 {
+    /**
+     * Service provider
+     *
+     * @var PhantomJsServiceContainer
+     */
+    protected $container;
+
+    /**
+     * PhantomJsServiceProvider constructor.
+     * Set service container
+     *
+     * @param $app
+     */
+    public function __construct($app)
+    {
+        parent::__construct($app);
+
+        $this->container = $this->getServiceContainer();
+    }
+
     /**
      * Publish config file
      *
@@ -32,13 +51,11 @@ class PhantomJsServiceProvider extends ServiceProvider
     {
         $this->app->singleton('phantomjs', function(){
 
-            $serviceContainer = $this->getServiceContainer();
-
             return new Client(
-                $serviceContainer->get('engine'),
-                $serviceContainer->get('procedure_loader'),
-                $serviceContainer->get('procedure_compiler'),
-                $serviceContainer->get('message_factory')
+                $this->container->get('engine'),
+                $this->container->get('procedure_loader'),
+                $this->container->get('procedure_compiler'),
+                $this->container->get('message_factory')
             );
         });
     }
@@ -82,11 +99,11 @@ class PhantomJsServiceProvider extends ServiceProvider
      *
      * @author Alireza Josheghani <josheghani.dev@gmail.com>
      * @since 8 May 2017
-     * @return Client
+     * @return PhantomJsServiceContainer
      */
     protected function getServiceContainer()
     {
-        $serviceContainer = ServiceContainer::getInstance();
+        $serviceContainer = PhantomJsServiceContainer::getInstance();
 
         $serviceContainer->set('engine', $this->getEngine());
 
