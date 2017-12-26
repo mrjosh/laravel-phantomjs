@@ -30,6 +30,8 @@ and then you can run vendor:publish command for generating phantomjs config file
  $ php artisan vendor:publish --provider="Josh\Component\PhantomJs\PhantomJsServiceProvider"
  ```
 
+#### Now you can config your phantomjs client in ```config/phantomjs.php``` file
+
 ## Basic Usage
 The following illustrates how to make a basic GET request and output the page content:
 
