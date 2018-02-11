@@ -47,7 +47,7 @@ $request = PhantomJs::getMessageFactory()->createRequest('http://google.com', 'G
 
 $response = PhantomJs::getMessageFactory()->createResponse();
 
-PhantomJs::send($request, $response);
+$response = PhantomJs::send($request, $response);
 
 if($response->getStatus() === 200) {
 
