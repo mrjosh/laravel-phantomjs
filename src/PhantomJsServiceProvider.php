@@ -14,7 +14,7 @@ class PhantomJsServiceProvider extends ServiceProvider
      * @since 7 May 2017
      * @return void
      */
-    public function boot()
+    public function boot() : void
     {
         $this->publishes([ __DIR__ . '/../config.php' => config_path( 'phantomjs.php' ) ]);
     }
@@ -26,7 +26,7 @@ class PhantomJsServiceProvider extends ServiceProvider
      * @since 7 May 2017
      * @return void
      */
-    public function register()
+    public function register() : void
     {
         $this->app->singleton('phantomjs', function(){
 
@@ -41,9 +41,9 @@ class PhantomJsServiceProvider extends ServiceProvider
      * @since 8 May 2017
      * @return PhantomJs
      */
-    protected function getClient()
+    protected function getClient() : PhantomJs
     {
-        $client = app(PhantomJs::class);
+        $client = new PhantomJs;
 
         if(file_exists(config_path('phantomjs.php'))){
             $config = config('phantomjs');

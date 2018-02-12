@@ -48,7 +48,9 @@ The following illustrates how to make a basic GET request and output the page co
 // you can use Facade or app make function to use phantomjs
 // ex: app('phantomjs') or \PhantomJs
 
-$response = \PhantomJs::get('http://google.com');
+$request = \PhantomJs::get('http://phantomjs.org/');
+
+$response = \PhantomJs::send($request);
 
 if($response->getStatus() === 200) {
 
@@ -60,38 +62,39 @@ if($response->getStatus() === 200) {
 Saving a screen capture to local disk:
 ```php
 
-$width  = 800;
-$height = 600;
-$top    = 0;
-$left   = 0;
-
-$request = \PhantomJs::getMessageFactory()->createCaptureRequest('http://google.com', 'GET');
+$request = \PhantomJs::createImage('http://phantomjs.org/', 'GET');
 
 $request->setOutputFile(public_path('file.jpg'));
 
-$request->setViewportSize($width, $height);
+$request->setViewportSize(800, 600);
 
-$request->setCaptureDimensions($width, $height, $top, $left);
+$request->setCaptureDimensions(800, 600, 0, 0);
 
-$response = \PhantomJs::getMessageFactory()->createResponse();
+$response = \PhantomJs::send($request);
 
-\PhantomJs::send($request, $response);
+if($response->getStatus() === 200) {
+
+    // Dump the requested page content
+    echo $response->getContent();
+}
 ```
 
 Outputting a page as PDF:
 
 ```php
-use Josh\Component\PhantomJs\PhantomJs;
-
-$request = PhantomJs::getMessageFactory()->createPdfRequest('http://google.com', 'GET');
+$request = \PhantomJs::createPdf('http://phantomjs.org/', 'GET');
 $request->setOutputFile(public_path('document.pdf'));
 $request->setFormat('A4');
 $request->setOrientation('landscape');
 $request->setMargin('1cm');
 
-$response = PhantomJs::getMessageFactory()->createResponse();
+$response = \PhantomJs::send($request);
 
-PhantomJs::send($request, $response);
+if($response->getStatus() === 200) {
+
+    // Dump the requested page content
+    echo $response->getContent();
+}
 ```
 
 ## License

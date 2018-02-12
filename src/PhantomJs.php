@@ -5,7 +5,12 @@ namespace Josh\Component\PhantomJs;
 use Illuminate\Support\Arr;
 use JonnyW\PhantomJs\Client;
 use JonnyW\PhantomJs\Engine;
+use JonnyW\PhantomJs\Http\Request;
+use JonnyW\PhantomJs\Http\Response;
+use JonnyW\PhantomJs\Http\PdfRequest;
+use JonnyW\PhantomJs\Http\CaptureRequest;
 use JonnyW\PhantomJs\Http\RequestInterface;
+use JonnyW\PhantomJs\Http\ResponseInterface;
 
 class PhantomJs
 {
@@ -31,7 +36,7 @@ class PhantomJs
      */
     public function __construct($options = [])
     {
-        $this->engine = new Engine();
+        $this->engine = new Engine;
         $this->setOptions($options);
         $this->container = $this->getContainer();
     }
@@ -42,7 +47,7 @@ class PhantomJs
      * @param $path
      * @return $this
      */
-    public function setBinaryPath($path)
+    public function setBinaryPath($path) : PhantomJs
     {
         $this->engine->setPath($path);
 
@@ -55,7 +60,7 @@ class PhantomJs
      * @param $debug
      * @return $this
      */
-    public function setDebug($debug)
+    public function setDebug($debug) : PhantomJs
     {
         $this->engine->debug($debug);
 
@@ -68,7 +73,7 @@ class PhantomJs
      * @param $cache
      * @return $this
      */
-    public function setCache($cache)
+    public function setCache($cache) : PhantomJs
     {
         $this->engine->cache($cache);
 
@@ -78,9 +83,9 @@ class PhantomJs
     /**
      * Get engine object of phantomjs client
      *
-     * @return \Illuminate\Foundation\Application|mixed
+     * @return Engine
      */
-    public function getEngine()
+    public function getEngine() : Engine
     {
         return $this->engine;
     }
@@ -90,7 +95,7 @@ class PhantomJs
      *
      * @return PhantomJsServiceContainer
      */
-    public function getContainer()
+    public function getContainer() : PhantomJsServiceContainer
     {
         $serviceContainer = PhantomJsServiceContainer::getInstance();
 
@@ -104,7 +109,7 @@ class PhantomJs
      *
      * @return \Exception|Client
      */
-    public function getClient()
+    public function getClient() : Client
     {
         try {
 
@@ -147,37 +152,66 @@ class PhantomJs
     }
 
     /**
-     * Create request
+     * send request
      *
      * @param $url
-     * @param string $method
+     * @param $method
+     * @param $timeout
      * @param array $headers
-     * @param array $data
-     * @param int $timeout
-     * @return RequestInterface
+     * @param array $parameters
+     * @return Request
      */
-    public function createRequest($url, $method = RequestInterface::METHOD_GET,$headers = [],$data = [], $timeout = 5000)
+    public function request(string $url, string $method = RequestInterface::METHOD_GET, int $timeout = 5000, array $headers = [], array $parameters = []) : Request
     {
-        $request = $this->getClient()->getMessageFactory()->createRequest($url, $method, $timeout);
+        $request = new Request($url, $method, $timeout);
 
         $request->setHeaders($headers);
 
-        $request->setRequestData($data);
+        $request->setRequestData($parameters);
 
         return $request;
     }
 
     /**
-     * Get response of request
+     * Create pdf request
      *
-     * @param $request
-     * @return \JonnyW\PhantomJs\Http\ResponseInterface
+     * @param $url
+     * @param $method
+     * @param int $timeout
+     * @param array $headers
+     * @param array $parameters
+     * @return PdfRequest
      */
-    public function createResponse($request)
+    public function createPdf(string $url, string $method = RequestInterface::METHOD_GET, int $timeout = 5000, array $headers = [], array $parameters = []) : PdfRequest
     {
-        $response = $this->getClient()->getMessageFactory()->createResponse();
+        $request = new PdfRequest($url, $method, $timeout);
 
-        return $this->getClient()->send($request, $response);
+        $request->setHeaders($headers);
+
+        $request->setRequestData($parameters);
+
+        return $request;
+    }
+
+    /**
+     * Create pdf request
+     *
+     * @param $url
+     * @param $method
+     * @param int $timeout
+     * @param array $headers
+     * @param array $parameters
+     * @return CaptureRequest
+     */
+    public function createImage(string $url, string $method = RequestInterface::METHOD_GET, int $timeout = 5000, array $headers = [], array $parameters = []) : CaptureRequest
+    {
+        $request = new CaptureRequest($url, $method, $timeout);
+
+        $request->setHeaders($headers);
+
+        $request->setRequestData($parameters);
+
+        return $request;
     }
 
     /**
@@ -186,13 +220,11 @@ class PhantomJs
      * @param $url
      * @param array $headers
      * @param array $parameters
-     * @return \JonnyW\PhantomJs\Http\ResponseInterface
+     * @return Request
      */
-    public function get($url,$headers = [],$parameters = [])
+    public function get(string $url, array $headers = [], array $parameters = []) : Request
     {
-        $request = $this->createRequest($url, 'GET', $headers, $parameters);
-
-        return $this->createResponse($request);
+        return $this->request($url, RequestInterface::METHOD_GET, 5000, $headers, $parameters);
     }
 
     /**
@@ -201,13 +233,11 @@ class PhantomJs
      * @param $url
      * @param array $headers
      * @param array $parameters
-     * @return \JonnyW\PhantomJs\Http\ResponseInterface
+     * @return Request
      */
-    public function post($url, $headers = [], $parameters = [])
+    public function post(string $url, array $headers = [], array $parameters = []) : Request
     {
-        $request = $this->createRequest($url, 'POST', $headers, $parameters);
-
-        return $this->createResponse($request);
+        return $this->request($url, RequestInterface::METHOD_POST, 5000, $headers, $parameters);
     }
 
     /**
@@ -216,13 +246,11 @@ class PhantomJs
      * @param $url
      * @param array $headers
      * @param array $parameters
-     * @return \JonnyW\PhantomJs\Http\ResponseInterface
+     * @return Request
      */
-    public function put($url, $headers = [], $parameters = [])
+    public function put(string $url, array $headers = [], array $parameters = []) : Request
     {
-        $request = $this->createRequest($url, 'PUT', $headers, $parameters);
-
-        return $this->createResponse($request);
+        return $this->request($url, RequestInterface::METHOD_PUT, 5000, $headers, $parameters);
     }
 
     /**
@@ -231,12 +259,22 @@ class PhantomJs
      * @param $url
      * @param array $headers
      * @param array $parameters
-     * @return \JonnyW\PhantomJs\Http\ResponseInterface
+     * @return Request
      */
-    public function delete($url, $headers = [], $parameters = [])
+    public function delete(string $url, array $headers = [], array $parameters = []) : Request
     {
-        $request = $this->createRequest($url, 'PUT', $headers, $parameters);
+        return $this->request($url, RequestInterface::METHOD_DELETE, 5000, $headers, $parameters);
+    }
 
-        return $this->createResponse($request);
+    /**
+     * Send request with response
+     *
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @return ResponseInterface
+     */
+    public function send(RequestInterface $request, ResponseInterface $response = null) : ResponseInterface
+    {
+        return $this->getClient()->send($request, ( is_null($response) ? new Response : $response ) );
     }
 }

@@ -15,7 +15,7 @@ class TestCase extends BaseTest
 
         $this->phantomjs = new PhantomJs([
 
-            'binary_path' => env('PHANTOMJS_BINARY_PATH')
+            'binary_path' => env('PHANTOMJS_BINARY_PATH', '/usr/local/bin/phantomjs')
         ]);
     }
 }
