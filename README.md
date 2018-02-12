@@ -31,7 +31,7 @@ Josh\Component\PhantomJs\PhantomJsServiceProvider::class
 
 and the following Facade to the aliases part
 ```php
-'PhantomJs' => Josh\Component\PhantomJs\PhantomJs::class
+'PhantomJs' => Josh\Component\PhantomJs\Facade\PhantomJs::class
 ```
 
 and then you can run vendor:publish command for generating phantomjs config file
