@@ -1,3 +1,10 @@
+[![Build Status](https://api.travis-ci.org/iamalirezaj/laravel-phantomjs.svg?branch=develop)](https://travis-ci.org/iamalirezaj/laravel-phantomjs)
+[![Latest Stable Version](https://poser.pugx.org/josh/laravel-phantomjs/v/stable)](https://packagist.org/packages/josh/laravel-phantomjs)
+[![Total Downloads](https://poser.pugx.org/josh/laravel-phantomjs/downloads)](https://packagist.org/packages/josh/laravel-phantomjs)
+[![Latest Unstable Version](https://poser.pugx.org/josh/laravel-phantomjs/v/unstable)](https://packagist.org/packages/josh/laravel-phantomjs)
+[![License](https://poser.pugx.org/josh/laravel-phantomjs/license)](https://packagist.org/packages/josh/laravel-phantomjs)
+[![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/iamalirezaj)
+
 # Laravel PhantomJs Client
 Using phantomjs client in laravel 
 
