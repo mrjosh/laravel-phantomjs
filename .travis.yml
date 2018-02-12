@@ -1,17 +1,20 @@
+os: osx
 sudo: true
 language: php
 php:
   - 7.0
-  - hhvm
+  - 7.1
 
-os:
-  - osx
+install:
+  - brew update
+  - brew install phantomjs
+  - composer self-update
+  - composer install
 
-before_install:
+before_script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update          ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install phantomjs; fi
   - export PHANTOMJS_BINARY_PATH=$(which phantomjs)
 
 script:
-  - composer install
   - vendor/bin/phpunit
