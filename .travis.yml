@@ -1,17 +1,11 @@
-os:
-  - osx
-  - linux
-  - windows
-
 language: php
+php:
+  - 7.1
 
 cache:
   directories:
     - vendor
     - $HOME/.composer/cache
-
-php:
-  - 7.1
 
 before_install:
   - sh .travis/install.sh
