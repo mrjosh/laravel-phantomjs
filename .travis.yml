@@ -1,0 +1,15 @@
+language: php
+php:
+  - 7.0
+  - hhvm
+
+script:
+  - apt install build-essential chrpath libssl-dev libxft-dev -y
+  - apt install libfreetype6 libfreetype6-dev
+  - apt install libfontconfig1 libfontconfig1-dev
+  - export PHANTOM_JS="phantomjs-2.1.1-linux-x86_64"
+  - curl https://github.com/Medium/phantomjs/releases/download/v2.1.1/$PHANTOM_JS.tar.bz2
+  - tar xvjf $PHANTOM_JS.tar.bz2
+  - export PHANTOMJS_BINARY_PATH=/usr/local/share/$PHANTOM_JS/bin/phantomjs
+  - composer install
+  - vendor/bin/phpunit

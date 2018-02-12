@@ -2,31 +2,10 @@
 
 namespace Josh\Component\PhantomJs;
 
-use JonnyW\PhantomJs\Engine;
-use JonnyW\PhantomJs\Client;
 use Illuminate\Support\ServiceProvider;
 
 class PhantomJsServiceProvider extends ServiceProvider
 {
-    /**
-     * Service provider
-     *
-     * @var PhantomJsServiceContainer
-     */
-    protected $container;
-
-    /**
-     * PhantomJsServiceProvider constructor.
-     * Set service container
-     *
-     * @param $app
-     */
-    public function __construct($app)
-    {
-        parent::__construct($app);
-
-        $this->container = $this->getServiceContainer();
-    }
 
     /**
      * Publish config file
@@ -51,62 +30,41 @@ class PhantomJsServiceProvider extends ServiceProvider
     {
         $this->app->singleton('phantomjs', function(){
 
-            return new Client(
-                $this->container->get('engine'),
-                $this->container->get('procedure_loader'),
-                $this->container->get('procedure_compiler'),
-                $this->container->get('message_factory')
-            );
+            return $this->getClient();
         });
     }
 
     /**
-     * Get engine istance
+     * Get phantomjs client
      *
      * @author Alireza Josheghani <josheghani.dev@gmail.com>
      * @since 8 May 2017
-     * @return Engine
+     * @return PhantomJs
      */
-    protected function getEngine()
+    protected function getClient()
     {
-        $engine = $this->app->make(Engine::class);
+        $client = app(PhantomJs::class);
 
         if(file_exists(config_path('phantomjs.php'))){
             $config = config('phantomjs');
 
             if(! empty($config['binary_path']) && ! is_null($config['binary_path'])){
-                $engine->setPath($config['binary_path']);
+                $client->setBinaryPath($config['binary_path']);
             }
 
             if(! empty($config['options']) && ! is_null($config['options'])){
-                $engine->setOptions($config['options']);
+                $client->setOptions($config['options']);
             }
 
             if(! empty($config['debug']) && ! is_null($config['debug'])){
-                $engine->debug($config['debug']);
+                $client->setDebug($config['debug']);
             }
 
             if(! empty($config['cache']) && ! is_null($config['cache'])){
-                $engine->debug($config['cache']);
+                $client->setCache($config['cache']);
             }
         }
 
-        return $engine;
-    }
-
-    /**
-     * Get Service container instance
-     *
-     * @author Alireza Josheghani <josheghani.dev@gmail.com>
-     * @since 8 May 2017
-     * @return PhantomJsServiceContainer
-     */
-    protected function getServiceContainer()
-    {
-        $serviceContainer = PhantomJsServiceContainer::getInstance();
-
-        $serviceContainer->set('engine', $this->getEngine());
-
-        return $serviceContainer;
+        return $client;
     }
 }

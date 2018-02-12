@@ -32,9 +32,9 @@ class PhantomJsServiceContainer extends ContainerBuilder
      */
     public static function getInstance()
     {
-        if (!self::$instance instanceof PhantomJsServiceContainer) {
+        if (! self::$instance instanceof PhantomJsServiceContainer) {
 
-            self::$instance = new PhantomJsServiceContainer();
+            self::$instance = new self;
             self::$instance->load();
         }
 
@@ -50,11 +50,11 @@ class PhantomJsServiceContainer extends ContainerBuilder
      */
     public function load($file = null)
     {
-        $loader = new YamlFileLoader($this, new FileLocator(__DIR__.'/../../../jonnyw/php-phantomjs/src/JonnyW/PhantomJs/Resources/config'));
+        $loader = new YamlFileLoader($this, new FileLocator(getcwd() . '/vendor/jonnyw/php-phantomjs/src/JonnyW/PhantomJs/Resources/config'));
         $loader->load('config.yml');
         $loader->load('services.yml');
 
         $this->setParameter('phantomjs.cache_dir', sys_get_temp_dir());
-        $this->setParameter('phantomjs.resource_dir', __DIR__.'/../../../jonnyw/php-phantomjs/src/JonnyW/PhantomJs/Resources');
+        $this->setParameter('phantomjs.resource_dir', getcwd() . '/vendor/jonnyw/php-phantomjs/src/JonnyW/PhantomJs/Resources');
     }
 }
