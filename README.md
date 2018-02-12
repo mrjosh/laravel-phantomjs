@@ -38,16 +38,10 @@ and then you can run vendor:publish command for generating phantomjs config file
 The following illustrates how to make a basic GET request and output the page content:
 
 ```php
-use Josh\Component\PhantomJs\PhantomJs;
-
 // you can use Facade or app make function to use phantomjs
 // ex: app('phantomjs') or \PhantomJs
 
-$request = PhantomJs::getMessageFactory()->createRequest('http://google.com', 'GET');
-
-$response = PhantomJs::getMessageFactory()->createResponse();
-
-$response = PhantomJs::send($request, $response);
+$response = \PhantomJs::get('http://google.com');
 
 if($response->getStatus() === 200) {
 
@@ -58,14 +52,13 @@ if($response->getStatus() === 200) {
 
 Saving a screen capture to local disk:
 ```php
-use Josh\Component\PhantomJs\PhantomJs;
 
 $width  = 800;
 $height = 600;
 $top    = 0;
 $left   = 0;
 
-$request = PhantomJs::getMessageFactory()->createCaptureRequest('http://google.com', 'GET');
+$request = \PhantomJs::getMessageFactory()->createCaptureRequest('http://google.com', 'GET');
 
 $request->setOutputFile(public_path('file.jpg'));
 
@@ -73,9 +66,9 @@ $request->setViewportSize($width, $height);
 
 $request->setCaptureDimensions($width, $height, $top, $left);
 
-$response = PhantomJs::getMessageFactory()->createResponse();
+$response = \PhantomJs::getMessageFactory()->createResponse();
 
-PhantomJs::send($request, $response);
+\PhantomJs::send($request, $response);
 ```
 
 Outputting a page as PDF:
