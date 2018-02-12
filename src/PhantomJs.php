@@ -142,10 +142,6 @@ class PhantomJs
      */
     public function setOptions(array $options)
     {
-        $this->setBinaryPath( Arr::get($options, 'binary_path', 'bin/phantomjs') );
-
-        Arr::forget($options,'binary_path');
-
         $this->engine->setOptions($options);
 
         return $this;

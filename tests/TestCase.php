@@ -13,9 +13,7 @@ class TestCase extends BaseTest
     {
         parent::__construct($name, $data, $dataName);
 
-        $this->phantomjs = new PhantomJs([
-
-            'binary_path' => env('PHANTOMJS_BINARY_PATH', '/usr/local/bin/phantomjs')
-        ]);
+        $this->phantomjs = new PhantomJs;
+        $this->phantomjs->setBinaryPath(env('PHANTOMJS_BINARY_PATH', '/usr/local/bin/phantomjs'));
     }
 }
