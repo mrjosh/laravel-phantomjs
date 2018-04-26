@@ -8,7 +8,7 @@
 # Laravel PhantomJs Client
 Using phantomjs client in laravel 
 
-[Full documantion](http://jonnnnyw.github.io/php-phantomjs/)
+[Full documentation](http://jonnnnyw.github.io/php-phantomjs/)
 
 # Requirement
 * [laravel/framework ^5](https://github.com/laravel/laravel)
