@@ -3,7 +3,7 @@
 return [
 
     // phantomjs binary path
-    'binary_path' => 'bin/phantomjs',
+    'binary_path' => base_path().'//bin/phantomjs',
 
     // phantomjs run options
     'options' => [],
