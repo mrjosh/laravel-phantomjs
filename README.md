@@ -44,6 +44,15 @@ and then you can run vendor:publish command for generating phantomjs config file
 ## Basic Usage
 The following illustrates how to make a basic GET request and output the page content:
 
+### On Load Finished
+```php
+// Will render page if this timeout is reached and resources haven't finished loading
+
+$request = \PhantomJs::get('http://phantomjs.org/');
+
+\PhantomJs::isLazy()->send($request);
+```
+
 ```php
 // you can use Facade or app make function to use phantomjs
 // ex: app('phantomjs') or \PhantomJs

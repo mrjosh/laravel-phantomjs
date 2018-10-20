@@ -2,7 +2,6 @@
 
 namespace Josh\Component\PhantomJs;
 
-use Illuminate\Support\Arr;
 use JonnyW\PhantomJs\Client;
 use JonnyW\PhantomJs\Engine;
 use JonnyW\PhantomJs\Http\Request;
@@ -27,6 +26,13 @@ class PhantomJs
      * @var PhantomJsServiceContainer
      */
     protected $container;
+
+    /**
+     * PhantomJs Client
+     *
+     * @var Client
+     */
+    protected $client;
 
     /**
      * PhantomJs constructor.
@@ -111,19 +117,29 @@ class PhantomJs
      */
     public function getClient() : Client
     {
+        return $this->client;
+    }
+
+    /**
+     * Set PhantomJs Client
+     *
+     * @param null $client
+     * @return PhantomJs
+     */
+    public function setClient($client = null)
+    {
         try {
 
-            return new Client(
+            $this->client = is_null($client) ? new Client(
                 $this->container->get('engine'),
                 $this->container->get('procedure_loader'),
                 $this->container->get('procedure_compiler'),
                 $this->container->get('message_factory')
-            );
+            ) : $client;
 
-        } catch (\Exception $exception) {
+        } catch (\Exception $exception) {}
 
-            return $exception;
-        }
+        return $this;
     }
 
     /**
@@ -145,6 +161,18 @@ class PhantomJs
         $this->engine->setOptions($options);
 
         return $this;
+    }
+
+    /**
+     * Set isLazy option to client
+     *
+     * @return $this
+     */
+    public function isLazy()
+    {
+        $client = $this->getClient()->isLazy();
+
+        return $this->setClient($client);
     }
 
     /**
