@@ -45,6 +45,7 @@ class PhantomJs
         $this->engine = new Engine;
         $this->setOptions($options);
         $this->container = $this->getContainer();
+        $this->setClient();
     }
 
     /**
