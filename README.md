@@ -46,7 +46,7 @@ The following illustrates how to make a basic GET request and output the page co
 
 ### On Load Finished
 ```php
-// Will render page if this timeout is reached and resources haven't finished loading
+// Tells the client to wait for all resources before rendering
 
 $request = \PhantomJs::get('http://phantomjs.org/');
 
