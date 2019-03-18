@@ -118,6 +118,10 @@ class PhantomJs
      */
     public function getClient() : Client
     {
+        if (!$this->client) {
+			$this->setClient();
+		}
+
         return $this->client;
     }
 
