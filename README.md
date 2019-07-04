@@ -1,4 +1,4 @@
-[![Build Status](https://api.travis-ci.org/iamalirezaj/laravel-phantomjs.svg?branch=develop)](https://travis-ci.org/iamalirezaj/laravel-phantomjs)
+[![Build Status](https://api.travis-ci.org/MrJoshLab/laravel-phantomjs.svg?branch=develop)](https://travis-ci.org/iamalirezaj/laravel-phantomjs)
 [![Latest Stable Version](https://poser.pugx.org/josh/laravel-phantomjs/v/stable)](https://packagist.org/packages/josh/laravel-phantomjs)
 [![Total Downloads](https://poser.pugx.org/josh/laravel-phantomjs/downloads)](https://packagist.org/packages/josh/laravel-phantomjs)
 [![Latest Unstable Version](https://poser.pugx.org/josh/laravel-phantomjs/v/unstable)](https://packagist.org/packages/josh/laravel-phantomjs)
