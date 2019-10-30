@@ -6,12 +6,12 @@
 [![License](https://poser.pugx.org/josh/laravel-phantomjs/license)](https://packagist.org/packages/josh/laravel-phantomjs)
 
 # Laravel PhantomJs Client
-Using phantomjs client in laravel 
+Using php-phantomjs client in laravel 
 
-[Full documentation](http://jonnnnyw.github.io/php-phantomjs/)
+[php-phantomjs Documentation](http://jonnnnyw.github.io/php-phantomjs/)
 
 # Requirement
-* [laravel/framework ^5](https://github.com/laravel/laravel)
+* [laravel/framework ^6](https://github.com/laravel/laravel)
 * [jonnyw/php-phantomjs 4.*](https://github.com/jonnnnyw/php-phantomjs)
 
 ## Install
@@ -48,7 +48,7 @@ The following illustrates how to make a basic GET request and output the page co
 ```php
 // Tells the client to wait for all resources before rendering
 
-$request = \PhantomJs::get('http://phantomjs.org/');
+$request = \PhantomJs::get('https://www.google.com/');
 
 \PhantomJs::isLazy()->send($request);
 ```
@@ -57,7 +57,7 @@ $request = \PhantomJs::get('http://phantomjs.org/');
 // you can use Facade or app make function to use phantomjs
 // ex: app('phantomjs') or \PhantomJs
 
-$request = \PhantomJs::get('http://phantomjs.org/');
+$request = \PhantomJs::get('https://www.google.com/');
 
 $response = \PhantomJs::send($request);
 
@@ -71,7 +71,7 @@ if($response->getStatus() === 200) {
 Saving a screen capture to local disk:
 ```php
 
-$request = \PhantomJs::createImage('http://phantomjs.org/', 'GET');
+$request = \PhantomJs::createImage('https://www.google.com/', 'GET');
 
 $request->setOutputFile(public_path('file.jpg'));
 
@@ -91,7 +91,7 @@ if($response->getStatus() === 200) {
 Outputting a page as PDF:
 
 ```php
-$request = \PhantomJs::createPdf('http://phantomjs.org/', 'GET');
+$request = \PhantomJs::createPdf('https://www.google.com/', 'GET');
 $request->setOutputFile(public_path('document.pdf'));
 $request->setFormat('A4');
 $request->setOrientation('landscape');
