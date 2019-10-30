@@ -2,6 +2,8 @@
 
 namespace Tests;
 
+use Illuminate\Support\Str;
+
 class PhantomJsRequestTest extends TestCase
 {
     /**
@@ -13,11 +15,11 @@ class PhantomJsRequestTest extends TestCase
      */
     public function testSimpleRequest()
     {
-        $request = $this->phantomjs->get('http://phantomjs.org/');
+        $request = $this->phantomjs->get('https://www.google.com/');
 
         $response = $this->phantomjs->send($request);
 
-        $this->assertEquals($response->getUrl(),'http://phantomjs.org/');
+        $this->assertEquals($response->getUrl(),'https://www.google.com/');
         $this->assertEquals($response->getStatus(),200);
     }
 
@@ -32,7 +34,7 @@ class PhantomJsRequestTest extends TestCase
     public function testCreatePdf()
     {
         $request = $this->phantomjs->createPdf('http://phantomjs.org/');
-        $request->setOutputFile($filename = str_random(30) . '.pdf');
+        $request->setOutputFile($filename = Str::random(30) . '.pdf');
         $request->setFormat('A4');
         $request->setOrientation('landscape');
         $request->setMargin('1cm');
@@ -54,7 +56,7 @@ class PhantomJsRequestTest extends TestCase
     public function testCreateImage()
     {
         $request = $this->phantomjs->createImage('http://phantomjs.org/');
-        $request->setOutputFile($filename = str_random(30) . '.png');
+        $request->setOutputFile($filename = Str::random(30) . '.png');
         $request->setViewportSize(800, 600);
         $request->setCaptureDimensions(800, 600, 0, 0);
 

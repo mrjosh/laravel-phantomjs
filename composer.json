@@ -1,11 +1,16 @@
 {
   "name": "josh/laravel-phantomjs",
   "description": "Use phantom-js in laravel",
-  "keywords": ["phantomjs-php", "phantomjs","phantom-js", "laravel"],
+  "keywords": [
+    "phantomjs-php",
+    "phantomjs",
+    "phantom-js",
+    "laravel"
+  ],
   "license": "MIT",
   "support": {
-    "issues": "https://github.com/iamalirezaj/laravel-phantomjs/issues",
-    "source": "https://github.com/iamalirezaj/laravel-phantomjs"
+    "issues": "https://github.com/MrJoshLab/laravel-phantomjs/issues",
+    "source": "https://github.com/MrJoshLab/laravel-phantomjs"
   },
   "authors": [
     {

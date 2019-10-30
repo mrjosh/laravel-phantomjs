@@ -190,7 +190,7 @@ class PhantomJs
      * @param array $parameters
      * @return Request
      */
-    public function request(string $url, string $method = RequestInterface::METHOD_GET, int $timeout = 5000, array $headers = [], array $parameters = []) : Request
+    public function request(string $url, string $method = "GET", int $timeout = 5000, array $headers = [], array $parameters = []) : Request
     {
         $request = new Request($url, $method, $timeout);
 
