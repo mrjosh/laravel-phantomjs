@@ -2,7 +2,7 @@
 [![Latest Stable Version](https://poser.pugx.org/josh/laravel-phantomjs/v/stable)](https://packagist.org/packages/josh/laravel-phantomjs)
 [![Total Downloads](https://poser.pugx.org/josh/laravel-phantomjs/downloads)](https://packagist.org/packages/josh/laravel-phantomjs)
 [![Latest Unstable Version](https://poser.pugx.org/josh/laravel-phantomjs/v/unstable)](https://packagist.org/packages/josh/laravel-phantomjs)
-[![Discord](https://discordapp.com/api/guilds/631068593748049920/embed.png)](https://discord.gg/pgeQ9m8)
+[![Discord](https://discordapp.com/api/guilds/415566764697583628/embed.png)](https://discord.gg/bHR599t)
 [![License](https://poser.pugx.org/josh/laravel-phantomjs/license)](https://packagist.org/packages/josh/laravel-phantomjs)
 
 # Laravel PhantomJs Client
