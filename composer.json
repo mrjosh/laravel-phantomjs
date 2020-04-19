@@ -29,7 +29,7 @@
     }
   },
   "require": {
-    "php": "^7.2",
+    "php": "^7.4.0",
     "laravel/framework": "^7",
     "josh/php-phantomjs": "^4"
   },
